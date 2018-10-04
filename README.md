@@ -1,6 +1,6 @@
-# Stack Processmaker 3.1.3 con Nginx y SQL Server
+# Stack Processmaker 3.2.1 con Nginx y SQL Server
 
-Este es un stack que permite la instalación de `Processmaker 3.1.3` o anteriores, en `CentOS 7.x/RHEL` junto con `Nginx` y conexión a `SQL Server`.
+Este es un stack que permite la instalación de `Processmaker 3.2.1` o anteriores, en `CentOS 7.x/RHEL` junto con `Nginx` y conexión a `SQL Server`.
 
 
 Para la instalación de este stack, se debe fusionar la documentación de dos stacks de ProcessMaker.
@@ -28,7 +28,7 @@ Para uso de producción, instale ProcessMaker en un servidor dedicado o máquina
 
 ## Requisitos de Software
 
-El stack actual está adaptado para instalar [ProcessMaker 3.1.3](https://sourceforge.net/projects/processmaker/files/ProcessMaker/3.1.3/) o anteriores y posee las siguientes especificaciones:
+El stack actual está adaptado para instalar [ProcessMaker 3.2.1](https://sourceforge.net/projects/processmaker/files/ProcessMaker/3.2.1/) o anteriores y posee las siguientes especificaciones:
 
 <table>
   <tr>
@@ -67,7 +67,7 @@ El stack actual está adaptado para instalar [ProcessMaker 3.1.3](https://source
   </tr>
 </table>
 
-Se recomienda encarecidamente instalar ProcessMaker con las configuraciones compatibles de este stack donde ProcessMaker se ha probado por completo. Sin embargo, también es posible instalar `ProcessMaker 3.2.1` pero no se han realizado pruebas.
+Se recomienda encarecidamente instalar ProcessMaker con las configuraciones compatibles de este stack donde ProcessMaker se ha probado por completo.
 
 # Configuraciones del entorno del servidor
 
@@ -985,7 +985,13 @@ Luego de ejecutar este comando, volver a repetir el **paso 2**.
 setsebool -P httpd_can_sendmail 1
 ```
 
-4. Para ejecutar ProcessMaker en cualquier puerto distinto de los puertos predeterminados de 80, 443, 488, 8008, 8009 y 8443, se debe configurar SELinux para permitir que se use otro puerto. Por ejemplo, para usar el puerto 8080:
+4. Configure el servidor web para permitir que los scripts y módulos HTTPD se conecten a la red:
+
+```
+setsebool -P httpd_can_network_connect 1
+```
+
+5. Para ejecutar ProcessMaker en cualquier puerto distinto de los puertos predeterminados de 80, 443, 488, 8008, 8009 y 8443, se debe configurar SELinux para permitir que se use otro puerto. Por ejemplo, para usar el puerto 8080:
 
 ```
 semanage port -a -t http_port_t -p tcp 8080
