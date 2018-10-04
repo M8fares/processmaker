@@ -586,10 +586,10 @@ SQL> quit
 
 Ahora todo está funcionando. Nos conectamos con el DSN denominado `DSNAlias` (que el archivo `/etc/odbc.ini` apunta a un SQL Server) con un nombre de usuario y contraseña. La conexión tuvo éxito y hicimos un select simple de una tabla cualquiera que tenía 2094 líneas. Como todo funciona, dimos el `quit` para salir.
 
-4. Luego se necesita habilitar la extensión `mssql.so` en `/etc/php.ini`, para ello ejecutaremos el siguiente comando:
+4. Luego se necesita habilitar la extensión `mssql.so` en `/etc/php.ini`, para ello iniciaremos sesión como usuario `root` y ejecutaremos el siguiente comando:
 
 ```
-echo "extension=mssql.so" > /etc/php.ini
+echo "extension=mssql.so" >> /etc/php.ini
 ```
 
 ## 7. Instale un Firewall y abra el puerto para ProcessMaker
