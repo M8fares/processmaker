@@ -1027,7 +1027,7 @@ Luego, en el navegador web, use el asistente de instalación para completar la i
 - **SQL Server y Centos 7.x**: [Microsoft SQL Server, PHP & CentOS 7.x](https://blog.remirepo.net/post/2016/09/20/Microsoft-SQL-Server-from-PHP)
 - **Freetds**: [Página oficial](http://www.freetds.org/) - [Instalación en CentOS 7.x](http://fdta.com.br/2017/03/19/como-usar-o-freetds-e-o-unixodbc-em-um-centos-7-com-php-5-4-para-acessar-bancos-de-dados-sql-server-e-sybase-asa/)
 - **SEManage**: [SEManage command not found](https://www.ostechnix.com/linux-troubleshooting-semanage-command-not-found-in-centos-7rhel-7/)
-- **Politicas SELinux**: [Configurando politicas SELinux](ttps://www.serverlab.ca/tutorials/linux/web-servers-linux/configuring-selinux-policies-for-apache-web-servers/)
+- **Politicas SELinux**: [Configurando politicas SELinux](https://www.serverlab.ca/tutorials/linux/web-servers-linux/configuring-selinux-policies-for-apache-web-servers/)
 
 Mucha más documentación puedes encontrarla en [ProcessMaker Wiki](https://wiki.processmaker.com/)
 
