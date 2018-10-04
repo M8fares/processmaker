@@ -159,7 +159,7 @@ Luego siga las instrucciones del asistente para asegurar MySQL como sigue:
 ![alt text](https://wiki.processmaker.com/sites/default/files/3.1Centos68MYSQLSecure01.png)
 
 2. Cambie la contraseña de `root`:
-> **Advertencia**: ProcessMaker NO admite caracteres especiales (como: ```@ # $ % ^ & ( /```) en la contraseña de `root`. Para más información, lea esta [sección](https://wiki.processmaker.com/3.1/Stack_205#MySQL_Password_with_Special_Characters).
+> **Advertencia**: ProcessMaker NO admite caracteres especiales (como: `@ # $ % ^ & ( /`) en la contraseña de `root`. Para más información, lea esta [sección](https://wiki.processmaker.com/3.1/Stack_205#MySQL_Password_with_Special_Characters).
 
 ![alt text](https://wiki.processmaker.com/sites/default/files/3.1Centos68MYSQLSecure1.png)
 
@@ -463,7 +463,7 @@ yum update
 Ahora es el turno de instalar los módulos de `PHP` y `UnixODBC`.
 
 ```
-yum -y install php-odbc php-pdo unixODBC unixODBC-devel
+yum -y install php-odbc php-pdo php-mssql unixODBC unixODBC-devel
 ```
 
 ### Instalar y configurar FreeTDS
@@ -524,7 +524,7 @@ Hasta el momento ya tenemos `FreeTDS` instalado, configurado y accediendo a la b
 
 Ahora es el momento de configurar el `UnixODBC`.
 
-1. Editar el ```/etc/odbcinst.ini``` y añadir el siguiente contenido:
+1. Editar el `/etc/odbcinst.ini` y añadir el siguiente contenido:
 
 ```
 [ODBC]
@@ -539,7 +539,7 @@ FileUsage = 1
 
 En el archivo anterior estamos diciendo que el `UnixODBC` debe utilizar el controlador FreeTDS (`/usr/lib64/libtdsodbc.so.0`) para las conexiones. Si queremos, para depurar las conexiones problemáticas, podemos habilitar `TraceFile` cambiando de `No` a `Yes` (en sistemas de producción, dejar como `No`).
 
-2. Ahora se debe crear o editar el archivo ```/etc/odbc.ini``` y añadir el siguiente contenido:
+2. Ahora se debe crear o editar el archivo `/etc/odbc.ini` y añadir el siguiente contenido:
 
 <pre>
 # Nombre de origen de datos (DSN) para MSSQL Server:
@@ -584,7 +584,13 @@ SQLRowCount returns 1
 SQL> quit
 </pre>
 
-Ahora todo está funcionando. Nos conectamos con el DSN denominado ```DSNAlias``` (que el archivo ```/etc/odbc.ini``` apunta a un SQL Server) con un nombre de usuario y contraseña. La conexión tuvo éxito y hicimos un select simple de una tabla cualquiera que tenía 2094 líneas. Como todo funciona, dimos el ```quit``` para salir.
+Ahora todo está funcionando. Nos conectamos con el DSN denominado `DSNAlias` (que el archivo `/etc/odbc.ini` apunta a un SQL Server) con un nombre de usuario y contraseña. La conexión tuvo éxito y hicimos un select simple de una tabla cualquiera que tenía 2094 líneas. Como todo funciona, dimos el `quit` para salir.
+
+4. Luego se necesita habilitar la extensión `mssql.so` en `/etc/php.ini`, para ello ejecutaremos el siguiente comando:
+
+```
+echo "extension=mssql.so" > /etc/php.ini
+```
 
 ## 7. Instale un Firewall y abra el puerto para ProcessMaker
 
@@ -933,7 +939,7 @@ Para configurar `SELinux` para que el servidor web pueda leer y escribir en el d
 yum install policycoreutils-python
 ```
 
-2. Inicie sesión como usuario ```root``` y emite los siguientes comandos desde el terminal:
+2. Inicie sesión como usuario `root` y emite los siguientes comandos desde el terminal:
 
 > En la documentación de ProcessMaker, exponen el contexto `httpd_sys_content_rw_t` el cuál no existe en `CentOS 7.x/RHEL`. El contexto adaptado para la plataforma es el siguiente `httpd_sys_rw_content_t`.
 
