@@ -942,6 +942,14 @@ semanage fcontext -a -t <b>httpd_sys_rw_content_t</b> '/opt/processmaker(/.*)?'
 restorecon -R -v <b>/opt/processmaker</b>
 </pre>
 
+En caso de que haya problemas al ejecutar el comando `semanage` se deben revisar los `locales` del sistema. Ejemplo:
+
+```
+export LC_ALL="es_CO.utf8"
+```
+
+Luego de ejecutar este comando, volver a repetir el **paso 2**.
+
 3. Configure el servidor web para enviar correos electrónicos:
 
 ```
