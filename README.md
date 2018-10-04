@@ -1043,7 +1043,6 @@ Luego, en el navegador web, use el asistente de instalación para completar la i
 
 # Recursos
 
-- **Gist for Stack Installation**: [Gist Stack Installation](**install-processmaker.sh**: ([Bash Gist]())
 - **Stack 205**: [ProcessMaker Stack 205](https://wiki.processmaker.com/3.1/Stack_205)
 - **Stack N220**: [ProcessMaker Stack N220](https://wiki.processmaker.com/3.2/Stack_N220)
 - **PHP 5.5**: [PHP 5.5 Instalación](https://www.tecmint.com/install-php-5-6-on-centos-7/)
