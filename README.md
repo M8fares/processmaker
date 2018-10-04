@@ -480,7 +480,13 @@ yum check-update
 yum install freetds freetds-devel
 ```
 
-2. El archivo de configuración de FreeTDS es `/etc/freetds.conf`. Edite este archivo para que sea similar al siguiente:
+2. El archivo de configuración de FreeTDS es `/etc/freetds.conf`.
+
+```
+nano /etc/freetds.conf
+```
+
+3. Edite este archivo para que sea similar al siguiente:
 
 <pre>
 [global]
@@ -506,7 +512,7 @@ yum install freetds freetds-devel
  tds version = 7.0
 </pre>
 
-3. Ahora tenemos que probar si la conexión a SQL Server, vía `FreeTDS`, para probar si está funcionando correctamente. Para ello utilizamos la utilidad `tsql` de `FreeTDS`.
+4. Ahora tenemos que probar si la conexión a SQL Server, vía `FreeTDS`, para probar si está funcionando correctamente. Para ello utilizamos la utilidad `tsql` de `FreeTDS`.
 
 <pre>
 tsql -S <b>AQUI SU NOMBRE DE SERVIDOR DE BASE DE DATOS</b> -U <b>usuario</b> -P <b>contraseña</b>
@@ -524,7 +530,13 @@ Hasta el momento ya tenemos `FreeTDS` instalado, configurado y accediendo a la b
 
 Ahora es el momento de configurar el `UnixODBC`.
 
-1. Editar el `/etc/odbcinst.ini` y añadir el siguiente contenido:
+1. Editar el archivo `/etc/odbcinst.ini`:
+
+```
+nano /etc/odbcinst.ini
+```
+
+2. Añadir el siguiente contenido:
 
 ```
 [ODBC]
@@ -537,9 +549,15 @@ Driver = /usr/lib64/libtdsodbc.so.0
 FileUsage = 1
 ```
 
-En el archivo anterior estamos diciendo que el `UnixODBC` debe utilizar el controlador FreeTDS (`/usr/lib64/libtdsodbc.so.0`) para las conexiones. Si queremos, para depurar las conexiones problemáticas, podemos habilitar `TraceFile` cambiando de `No` a `Yes` (en sistemas de producción, dejar como `No`).
+> En el archivo anterior estamos diciendo que el `UnixODBC` debe utilizar el controlador FreeTDS (`/usr/lib64/libtdsodbc.so.0`) para las conexiones. Si queremos, para depurar las conexiones problemáticas, podemos habilitar `TraceFile` cambiando de `No` a `Yes` (en sistemas de producción, dejar como `No`).
 
-2. Ahora se debe crear o editar el archivo `/etc/odbc.ini` y añadir el siguiente contenido:
+3. Ahora se debe crear o editar el archivo `/etc/odbc.ini`:
+
+```
+nano /etc/odbc.ini
+```
+
+4. Añadir el siguiente contenido:
 
 <pre>
 # Nombre de origen de datos (DSN) para MSSQL Server:
@@ -552,14 +570,13 @@ Server = <b>AQUI LA IP DE SU SERVIDOR</b>
 Port = <b>AQUI EL PUERTO PARA RECIBIR CONEXIÓN A SQL SERVER</b>
 </pre>
 
-Explicando el archivo anterior para SQL Server:
+> Explicando el archivo anterior para SQL Server:
+> - **DSNAlias** = Es un alias, el nombre del DSN. Puede ser cualquier cosa y se utilizará en las llamadas de conexión a SQL Server.
+> - **Server** = IP del servidor de SQL Server.
+> - **Port** = Puerto de SQL Server para recibir conexiones.
+> - (Opcional): **Database** = Nombre de la base de datos a la que desea conectarse.
 
-- **DSNAlias** = Es un alias, el nombre del DSN. Puede ser cualquier cosa y se utilizará en las llamadas de conexión a SQL Server.
-- **Server** = IP del servidor de SQL Server.
-- **Port** = Puerto de SQL Server para recibir conexiones.
-- > (**Opcional**): Database = Nombre de la base de datos a la que desea conectarse.
-
-3. Ahora vamos a probar las conexiones a las bases de datos vía `UnixODBC`, a través de la utilidad `isql` de `UnixODBC`.
+5. Ahora vamos a probar las conexiones a las bases de datos vía `UnixODBC`, a través de la utilidad `isql` de `UnixODBC`.
 
 - Prueba de conexión a SQL Server mediante el DSN `DSNAlias`:
 
@@ -586,7 +603,7 @@ SQL> quit
 
 Ahora todo está funcionando. Nos conectamos con el DSN denominado `DSNAlias` (que el archivo `/etc/odbc.ini` apunta a un SQL Server) con un nombre de usuario y contraseña. La conexión tuvo éxito y hicimos un select simple de una tabla cualquiera que tenía 2094 líneas. Como todo funciona, dimos el `quit` para salir.
 
-4. Luego se necesita habilitar la extensión `mssql.so` en `/etc/php.ini`, para ello iniciaremos sesión como usuario `root` y ejecutaremos el siguiente comando:
+6. Luego se necesita habilitar la extensión `mssql.so` en `/etc/php.ini`, para ello iniciaremos sesión como usuario `root` y ejecutaremos el siguiente comando:
 
 ```
 echo "extension=mssql.so" >> /etc/php.ini
