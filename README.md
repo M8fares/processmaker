@@ -705,7 +705,13 @@ Después de estos cambios, verifique los permisos y el propietario del directori
 
 ## 3. Configuración de Nginx
 
-Cree un archivo de configuración dentro de `/etc/nginx/conf.d/` con el comando:
+1. Deshabilite los VirtualHost por defecto de Nginx:
+
+```
+mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.disabled
+```
+
+2. Cree un archivo de configuración dentro de `/etc/nginx/conf.d/` con el comando:
 
 ```
 nano /etc/nginx/conf.d/processmaker.conf
