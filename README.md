@@ -277,7 +277,7 @@ sed -i '/upload_max_filesize = 2M/c\upload_max_filesize = 24M' /etc/php.ini
 3. Establezca esta configuración estándar de ProcessMaker y cambie el atributo `date.timezone` con su zona horaria, como ejemplo:
 
 <pre>
-sed -i '/;date.timezone =/c\date.timezone = <b style="color: blue;">America/Bogota</b>' /etc/php.ini
+sed -i '/;date.timezone =/c\date.timezone = <b>America/Bogota</b>' /etc/php.ini
 </pre>
 
 
@@ -500,16 +500,16 @@ yum install freetds freetds-devel
  # errores de tipo out-of-memory errors
  text size = 64512
 
-[<b style="color: blue;">AQUI SU NOMBRE DE SERVIDOR DE BASE DE DATOS</b>]
- host = <b style="color: blue;">AQUI LA IP DE SU SERVIDOR</b>
- port = <b style="color: blue;">AQUI EL PUERTO PARA RECIBIR CONEXIÓN A SQL SERVER</b>
+[<b>AQUI SU NOMBRE DE SERVIDOR DE BASE DE DATOS</b>]
+ host = <b>AQUI LA IP DE SU SERVIDOR</b>
+ port = <b>AQUI EL PUERTO PARA RECIBIR CONEXIÓN A SQL SERVER</b>
  tds version = 7.0
 </pre>
 
 3. Ahora tenemos que probar si la conexión a SQL Server, vía `FreeTDS`, para probar si está funcionando correctamente. Para ello utilizamos la utilidad `tsql` de `FreeTDS`.
 
 <pre>
-tsql -S <b style="color: blue;">AQUI SU NOMBRE DE SERVIDOR DE BASE DE DATOS</b> -U <b style="color: blue;">usuario</b> -P <b style="color: blue;">contraseña</b>
+tsql -S <b>AQUI SU NOMBRE DE SERVIDOR DE BASE DE DATOS</b> -U <b>usuario</b> -P <b>contraseña</b>
 locale is "en_US.UTF-8"
 locale charset is "UTF-8"
 using default charset "UTF-8"
@@ -543,13 +543,13 @@ En el archivo anterior estamos diciendo que el `UnixODBC` debe utilizar el contr
 
 <pre>
 # Nombre de origen de datos (DSN) para MSSQL Server:
-[<b style="color: blue;">DSNAlias</b>]
+[<b>DSNAlias</b>]
 Description = Conexión a SQL Server 2008 R2
 Driver = FreeTDS
 Trace = No
-Server = <b style="color: blue;">AQUI LA IP DE SU SERVIDOR</b>
-# Database = <b style="color: blue;">AQUI EL NOMBRE DE SU BASE DE DATOS</b> (opcional)
-Port = <b style="color: blue;">AQUI EL PUERTO PARA RECIBIR CONEXIÓN A SQL SERVER</b>
+Server = <b>AQUI LA IP DE SU SERVIDOR</b>
+# Database = <b>AQUI EL NOMBRE DE SU BASE DE DATOS</b> (opcional)
+Port = <b>AQUI EL PUERTO PARA RECIBIR CONEXIÓN A SQL SERVER</b>
 </pre>
 
 Explicando el archivo anterior para SQL Server:
@@ -564,7 +564,7 @@ Explicando el archivo anterior para SQL Server:
 - Prueba de conexión a SQL Server mediante el DSN `DSNAlias`:
 
 <pre>
-isql <b style="color: blue;">DSNAlias usuario contraseña </b> -v
+isql <b>DSNAlias usuario contraseña </b> -v
 +---------------------------------------+
 | Connected!                            |
 |                                       |
@@ -573,7 +573,7 @@ isql <b style="color: blue;">DSNAlias usuario contraseña </b> -v
 | quit                                  |
 |                                       |
 +---------------------------------------+
-SQL> select count(*) from <b style="color: blue;">tabla</b>;
+SQL> select count(*) from <b>tabla</b>;
 +------------+
 |            |
 +------------+
@@ -606,8 +606,8 @@ systemctl enable firewalld
 3. Abra el puerto donde se ejecutará ProcessMaker, que es el puerto 80 de manera predeterminada o el puerto 443. Para usar un puerto que no sea el puerto 80 o 443, es necesario cambiar el número de puerto con el siguiente comando.
 
 <pre>
-firewall-cmd --zone=public --add-port=<b style="color: blue;">80</b>/tcp --permanent
-firewall-cmd --zone=public --add-port=<b style="color: blue;">443</b>/tcp --permanent
+firewall-cmd --zone=public --add-port=<b>80</b>/tcp --permanent
+firewall-cmd --zone=public --add-port=<b>443</b>/tcp --permanent
 firewall-cmd --reload
 </pre>
 
@@ -643,19 +643,19 @@ Una vez finalizada la descarga, descomprima el archivo comprimido en el director
 ### Community Edition
 
 <pre>
-tar -C <b style="color: blue;">/opt</b> -xzvf processmaker-X.X.X-community.tar.gz 
+tar -C <b>/opt</b> -xzvf processmaker-X.X.X-community.tar.gz 
 </pre>
 
 ### Standard, Corporate or Enterprise editions
 
 <pre>
-tar -C <b style="color: blue;">/opt</b> -xzvf processmaker-X.X.X.tar.gz 
+tar -C <b>/opt</b> -xzvf processmaker-X.X.X.tar.gz 
 </pre>
 
 Verifique que ProcessMaker se haya descomprimido correctamente:
 
 <pre>
-ls <b style="color: blue;">/opt/processmaker</b>
+ls <b>/opt/processmaker</b>
 </pre>
 
 El directorio de `/opt/processmaker` debe ser similar al siguiente contenido:
@@ -673,7 +673,7 @@ Por lo tanto, el servicio web debe ser propietario del directorio ProcessMaker p
 Para hacer recursivos los cambios de propiedad en `Nginx`, use el siguiente comando:
 
 <pre>
-chown -R nginx:nginx <b style="color: blue;">/opt/processmaker</b>
+chown -R nginx:nginx <b>/opt/processmaker</b>
 </pre>
 
 Después de estos cambios, verifique los permisos y el propietario del directorio de processmaker con el comando `ls -l`. A continuación se muestra un ejemplo del servidor web `Nginx`.
@@ -705,8 +705,8 @@ server {
   listen 80;
   listen [::]:80;
   # User server DNS name
-  server_name <b style="color: blue;">nginx.processmaker.com</b>;
-  return 301 <b style="color: blue;">https://nginx.processmaker.com</b>$request_uri;
+  server_name <b>nginx.processmaker.com</b>;
+  return 301 <b>https://nginx.processmaker.com</b>$request_uri;
 }
 
 # ProcessMaker HTTPS Virtual Host
@@ -714,7 +714,7 @@ server {
   listen 443 ssl http2;
   listen [::]:443 ssl http2;
 
-  server_name <b style="color: blue;">nginx.processmaker.com</b>;
+  server_name <b>nginx.processmaker.com</b>;
          
   # Should point to where you SSL certificates are located
   ssl_certificate /etc/ssl/certs/processmaker/cert-n.pem;
@@ -743,7 +743,7 @@ server {
   # Include phpMyAdmin configuration file
   include /opt/phpMyAdmin/phpMyAdmin.conf;
 
-  root <b style="color: blue;">/opt/processmaker</b>/workflow/public_html; #where ProcessMaker is installed
+  root <b>/opt/processmaker</b>/workflow/public_html; #where ProcessMaker is installed
   index index.html index.htm app.php index.php;
   try_files $uri $uri/ /index.php?$args;
   charset utf-8;
@@ -767,7 +767,7 @@ server {
     fastcgi_pass unix:/var/run/php-fpm/processmaker.sock;
     fastcgi_index    app.php;
     include fastcgi_params;
-    fastcgi_param    SCRIPT_FILENAME  <b style="color: blue;">/opt/processmaker</b>/workflow/public_html/app.php;
+    fastcgi_param    SCRIPT_FILENAME  <b>/opt/processmaker</b>/workflow/public_html/app.php;
     fastcgi_intercept_errors off;
 
     fastcgi_buffers 8 16k;
@@ -787,7 +787,7 @@ server {
     fastcgi_pass unix:/var/run/php-fpm/processmaker.sock;
     fastcgi_index    app.php;
     include fastcgi_params;
-    fastcgi_param    SCRIPT_FILENAME  <b style="color: blue;">/opt/processmaker</b>/workflow/public_html/app.php;
+    fastcgi_param    SCRIPT_FILENAME  <b>/opt/processmaker</b>/workflow/public_html/app.php;
     fastcgi_intercept_errors off;
 
     fastcgi_buffers 8 16k;
@@ -812,10 +812,10 @@ server {
 2. En el mismo archivo, cambie el atributo `server_name` con la IP de su servidor como ejemplo:
 
 <pre>
-server_name <b style="color: blue;">192.168.1.100</b>;
+server_name <b>192.168.1.100</b>;
 </pre>
 
-3. En dando caso que haya hecho la instalación de ProcessMaker en otro directorio, asegurese de cambiar los directorios marcados en <b style="color: blue;">azul</b>.
+3. En dando caso que haya hecho la instalación de ProcessMaker en otro directorio, asegurese de cambiar los directorios marcados en **negrita**.
 
 ### <a name="virtualhost-nginx-without-ssl">VirtualHost en Nginx sin SSL</a>
 
@@ -829,11 +829,11 @@ server {
   listen 80;
   listen [::]:80;
   # Change for server DNS name
-  server_name <b style="color: blue;">nginx.processmaker.com</b>;
+  server_name <b>nginx.processmaker.com</b>;
   # The following line must be added Only if phpMyAdmin is configured
   # include /opt/phpMyAdmin/phpMyAdmin.conf;
  
-  root <b style="color: blue;">/opt/processmaker</b>/workflow/public_html; #where ProcessMaker is installed
+  root <b>/opt/processmaker</b>/workflow/public_html; #where ProcessMaker is installed
  
   index index.html index.htm app.php index.php;
  
@@ -864,7 +864,7 @@ server {
     fastcgi_index    app.php;
  
     include fastcgi_params;
-    fastcgi_param    SCRIPT_FILENAME  <b style="color: blue;">/opt/processmaker</b>/workflow/public_html/app.php;
+    fastcgi_param    SCRIPT_FILENAME  <b>/opt/processmaker</b>/workflow/public_html/app.php;
     fastcgi_intercept_errors off;
     fastcgi_buffers 8 16k;
     fastcgi_buffer_size 32k;
@@ -884,7 +884,7 @@ server {
     fastcgi_index    app.php;
  
     include fastcgi_params;
-    fastcgi_param    SCRIPT_FILENAME  <b style="color: blue;">/opt/processmaker</b>/workflow/public_html/app.php;
+    fastcgi_param    SCRIPT_FILENAME  <b>/opt/processmaker</b>/workflow/public_html/app.php;
     fastcgi_intercept_errors off;
     fastcgi_buffers 8 16k;
     fastcgi_buffer_size 32k;
@@ -908,10 +908,10 @@ server {
 2. En el mismo archivo, cambie el atributo `server_name` con la IP de su servidor como ejemplo:
 
 <pre>
-server_name <b style="color: blue;">192.168.1.100</b>;
+server_name <b>192.168.1.100</b>;
 </pre>
 
-3. En dando caso que haya hecho la instalación de ProcessMaker en otro directorio, asegurese de cambiar los directorios marcados en <b style="color: blue;">azul</b>.
+3. En dando caso que haya hecho la instalación de ProcessMaker en otro directorio, asegurese de cambiar los directorios marcados en **negrita**.
 
 ## 4. Configuraciones SELinux
 
@@ -938,8 +938,8 @@ yum install policycoreutils-python
 > En la documentación de ProcessMaker, exponen el contexto `httpd_sys_content_rw_t` el cuál no existe en `CentOS 7.x/RHEL`. El contexto adaptado para la plataforma es el siguiente `httpd_sys_rw_content_t`.
 
 <pre>
-semanage fcontext -a -t <b style="color: blue;">httpd_sys_rw_content_t</b> '/opt/processmaker(/.*)?'
-restorecon -R -v <b style="color: blue;">/opt/processmaker</b>
+semanage fcontext -a -t <b>httpd_sys_rw_content_t</b> '/opt/processmaker(/.*)?'
+restorecon -R -v <b>/opt/processmaker</b>
 </pre>
 
 3. Configure el servidor web para enviar correos electrónicos:
