@@ -122,8 +122,8 @@ yum install -y mysql-community-server
 3. Inicie el servicio MySQL y configúrelo para que se inicie automáticamente en el arranque.
 
 ```
-systemctl start mysql
-systemctl enable mysql
+systemctl start mysqld
+systemctl enable mysqld
 ```
 
 4. Asegúrese de que el servicio mysql se esté ejecutando al verificar su estado con el siguiente comando:
