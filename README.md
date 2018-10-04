@@ -73,7 +73,7 @@ Se recomienda encarecidamente instalar ProcessMaker con las configuraciones comp
 
 Suponiendo que `CentOS 7.x/RHEL` ya está instalado, lea las siguientes instrucciones para configurar el stack antes de instalar ProcessMaker.
 
-## 1. Actualizar CentOS 7.x
+## 1. Actualizar CentOS 7.x/RHEL
 
 La recomendación estándar antes de cualquier cosa es actualizar `CentOS 7.x/RHEL` para asegurarse de que todos los paquetes estén en las últimas versiones con los parches de seguridad instalados.
 
